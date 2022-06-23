@@ -1,11 +1,6 @@
 #include <iostream>
 #include "Renderer.h"
 
-void Renderer::setPixel(uint32_t x, uint32_t y, uint32_t colour)
-{
-    pixels[x + y*winHeight] = colour;
-}
-
 SDL_Window* Renderer::createWindow(int height, int width)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -51,7 +46,21 @@ void Renderer::enterRenderLoop()
             }
         }
 
-        updateCallback();
+        SDL_RenderClear(renderer);
+
+        scene->Update();
+
+        for (int y=0; y<winHeight; y++)
+        {
+            for (int x=0; x<winWidth; x++)
+            {
+                int color = scene->getPixel(x,y);
+                SDL_SetRenderDrawColor(renderer, color, color, color, 255);
+                SDL_RenderDrawPoint(renderer, x, y);
+            }
+        }
+
+        SDL_RenderPresent(renderer);
     }
 
     // Maybe move them in the destructor
@@ -66,7 +75,7 @@ void Renderer::Init()
     createRendererFromWindow();
 }
 
-void Renderer::setUpdateCallback(std::function<void()> _updateCallback)
+void Renderer::setScene(Scene* _scene)
 {
-    updateCallback = _updateCallback;
-};
+    scene = _scene;
+}

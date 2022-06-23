@@ -1,7 +1,6 @@
-#include <stdint.h>
 #include <stdlib.h>
-#include <vector>
 #include <SDL.h>
+#include "Scene.h"
 
 class Renderer 
 {
@@ -9,16 +8,14 @@ class Renderer
         Renderer(int height, int width): winHeight(height), winWidth(width) {};
 
         void Init();
-        void setUpdateCallback(std::function<void()> _updateCallback);
+
+        void setScene(Scene* scene);
+
         void enterRenderLoop();
 
-        void setPixel(uint32_t x, uint32_t y, uint32_t color);
-
     private:
-        std::vector<uint32_t> pixels;
-
-        uint32_t winHeight;
-        uint32_t winWidth;
+        int winHeight;
+        int winWidth;
 
         SDL_Window* window;
         SDL_Renderer* renderer;
@@ -26,5 +23,5 @@ class Renderer
         SDL_Window* createWindow(int height, int width);
         SDL_Renderer* createRendererFromWindow();
 
-        std::function<void()> updateCallback;
+        Scene* scene;
 };

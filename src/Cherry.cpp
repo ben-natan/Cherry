@@ -1,21 +1,16 @@
 #include "Renderer.h"
 #include <iostream>
 
-void testCallback()
-{
-    int i = 0;
-    while (i<10000) {
-        i++;
-    }
-    std::cout << "One render loop" << std::endl;
-}
-
 int main()
 {
-    Renderer renderer = Renderer(640, 640);
+    int height = 640;
+    int width = 640;
+
+    Renderer renderer = Renderer(height, width);
+    Scene* scene = new Scene(height, width);
 
     renderer.Init();
-    renderer.setUpdateCallback(testCallback);
+    renderer.setScene(scene);
 
     renderer.enterRenderLoop();
 
