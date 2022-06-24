@@ -5,7 +5,7 @@
 class Renderer 
 {
     public:
-        Renderer() = default;
+        Renderer(int _frameRate): frameRate(_frameRate) {};
 
         void Init();
 
@@ -16,7 +16,9 @@ class Renderer
     private:
         int winHeight;
         int winWidth;
-        int frame;
+        int frameCount;
+
+        int frameRate;
 
         SDL_Window* window;
         SDL_Renderer* renderer;

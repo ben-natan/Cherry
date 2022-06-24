@@ -7,7 +7,7 @@ int main()
     int width = 12;
     int tileSize = 30;
 
-    Renderer renderer = Renderer();
+    Renderer renderer = Renderer(3);
     Scene* scene = new Scene(height, width, 30);
 
     renderer.setScene(scene);

@@ -1,11 +1,14 @@
 #include <iostream>
+#include <chrono>
 #include "Renderer.h"
 
 void Renderer::enterRenderLoop()
 {
     bool quit = false;
     SDL_Event event;
-    frame = 1;
+    frameCount = 1;
+
+    int numTicks = SDL_GetTicks();
 
     while (!quit) 
     {
@@ -41,7 +44,15 @@ void Renderer::enterRenderLoop()
         }
 
         SDL_RenderPresent(renderer);
-        std::cout << "Frame: " << frame++ << '\r' << std::flush;
+        std::cout << "Frame: " << frameCount++ << '\r' << std::flush;
+
+
+        while ((SDL_GetTicks() - numTicks) < 1000 / frameRate)
+        {
+            SDL_Delay((1000 / frameRate) - (SDL_GetTicks() - numTicks));
+        }
+
+        numTicks = SDL_GetTicks();
     }
 
     // Maybe move them in the destructor
