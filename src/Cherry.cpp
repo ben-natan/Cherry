@@ -3,14 +3,15 @@
 
 int main()
 {
-    int height = 640;
-    int width = 640;
+    int height = 12;
+    int width = 12;
+    int tileSize = 30;
 
-    Renderer renderer = Renderer(height, width);
-    Scene* scene = new Scene(height, width);
+    Renderer renderer = Renderer();
+    Scene* scene = new Scene(height, width, 30);
 
-    renderer.Init();
     renderer.setScene(scene);
+    renderer.Init();
 
     renderer.enterRenderLoop();
 

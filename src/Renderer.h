@@ -5,7 +5,7 @@
 class Renderer 
 {
     public:
-        Renderer(int height, int width): winHeight(height), winWidth(width) {};
+        Renderer() = default;
 
         void Init();
 
@@ -16,12 +16,10 @@ class Renderer
     private:
         int winHeight;
         int winWidth;
+        int frame;
 
         SDL_Window* window;
         SDL_Renderer* renderer;
-
-        SDL_Window* createWindow(int height, int width);
-        SDL_Renderer* createRendererFromWindow();
 
         Scene* scene;
 };
