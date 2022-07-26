@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <iostream>
+#include "RuleSet.h"
 
 int main()
 {
@@ -8,7 +9,14 @@ int main()
     int tileSize = 30;
 
     Renderer renderer = Renderer(3);
-    Scene* scene = new Scene(height, width, 30);
+
+    // Should be defined elsewhere
+    std::vector<Color> sourcePattern = {Color::Red, Color::Blue};
+    std::vector<Color> targetPattern = {Color::Blue, Color::Blue};
+    Rule rule = Rule(sourcePattern, targetPattern);
+    RuleSet ruleSet = RuleSet(rule);
+
+    Scene* scene = new Scene(height, width, tileSize, ruleSet);
 
     renderer.setScene(scene);
     renderer.Init();

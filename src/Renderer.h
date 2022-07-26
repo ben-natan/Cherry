@@ -1,6 +1,11 @@
+#ifndef RENDERER_H
+#define RENDERER_H
+
 #include <stdlib.h>
 #include <SDL.h>
 #include "Scene.h"
+#include "Tile.h"
+
 
 class Renderer 
 {
@@ -25,3 +30,5 @@ class Renderer
 
         Scene* scene;
 };
+
+#endif

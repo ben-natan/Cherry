@@ -28,11 +28,15 @@ void Renderer::enterRenderLoop()
         {
             for (int x=0; x<winWidth; x++)
             {
-                std::string colorCode = scene->getTileFromPixel(x, y);
+                Color color = scene->getTileFromPixel(x, y).getColor();
 
-                if (!colorCode.compare("R"))
+                if (color == Color::Red)
                 {
                     SDL_SetRenderDrawColor(renderer, 250, 0, 0, 255);
+                }
+                else if (color == Color::Green)
+                {
+                    SDL_SetRenderDrawColor(renderer, 0, 250, 0, 255);
                 }
                 else
                 {
