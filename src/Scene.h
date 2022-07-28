@@ -18,13 +18,14 @@ class Scene
                 for (int y = 0; y < _height; y++)
                 {
                     Color color;
-                    if (((x + y) % 2) == 0)
+
+                    if (x == _width / 2 && y == _height / 2) 
                     {
-                        color = Color::Red;
+                        color = Color::W;
                     }
                     else
                     {
-                        color = Color::Blue;
+                        color = Color::B;
                     }
                     this->tiles[x + _width*y] = Tile(x, y, color);
                 }

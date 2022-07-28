@@ -1,12 +1,12 @@
 #ifndef TILE_H
 #define TILE_H
 
-enum Color {
-    Red = 0,
-    Blue,
-    Green,
-};
+#define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
+  public:                                      \
+    Enum() = default;
+#include <enum.h>
 
+BETTER_ENUM(Color, char, B = 1, I, P, E, N, D, A, W, R, O, Y, G, U, S, K, F);
 
 class Tile
 {

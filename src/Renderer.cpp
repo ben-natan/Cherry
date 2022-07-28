@@ -30,19 +30,9 @@ void Renderer::enterRenderLoop()
             {
                 Color color = scene->getTileFromPixel(x, y).getColor();
 
-                if (color == Color::Red)
-                {
-                    SDL_SetRenderDrawColor(renderer, 250, 0, 0, 255);
-                }
-                else if (color == Color::Green)
-                {
-                    SDL_SetRenderDrawColor(renderer, 0, 250, 0, 255);
-                }
-                else
-                {
-                    SDL_SetRenderDrawColor(renderer, 0, 0, 250, 255);
-                }
-                
+                int r, g, b;
+                this->ColorToRGB(color, r, g, b);
+                SDL_SetRenderDrawColor(renderer, r, g, b, 255);
                 SDL_RenderDrawPoint(renderer, x, y);
             }
         }
@@ -82,3 +72,104 @@ void Renderer::setScene(Scene* _scene)
     winWidth = scene->getWidth() * scene->getTileSize();
     winHeight = scene->getHeight() * scene->getTileSize();
 };
+
+void Renderer::ColorToRGB(Color color, int& r, int& g, int &b)
+{
+    switch (color)
+    {
+        case Color::B:
+            r = 0;
+            g = 0;
+            b = 0;
+            break;
+
+        case Color::I:
+            r = 29;
+            g = 43;
+            b = 83;
+            break;
+        
+        case Color::P:
+            r = 126;
+            g = 37;
+            b = 83;
+            break;
+
+        case Color::E:
+            r = 0;
+            g = 135;
+            b = 81;
+            break;
+        
+        case Color::N:
+            r = 171;
+            g = 82;
+            b = 54;
+            break;
+
+        case Color::D:
+            r = 95;
+            g = 87;
+            b = 79;
+            break;
+       
+        case Color::A:
+            r = 194;
+            g = 195;
+            b = 199;
+            break;
+        
+        case Color::W:
+            r = 255;
+            g = 241;
+            b = 232;
+            break;
+
+        case Color::R:
+            r = 255;
+            g = 0;
+            b = 77;
+            break;
+
+        case Color::O:
+            r = 255;
+            g = 163;
+            b = 0;
+            break;
+
+        case Color::Y:
+            r = 255;
+            g = 236;
+            b = 39;
+            break;
+
+        case Color::G:
+            r = 0;
+            g = 228;
+            b = 54;
+            break;
+
+        case Color::U:
+            r = 41;
+            g = 173;
+            b = 255;
+            break;
+
+        case Color::S:
+            r = 131;
+            g = 118;
+            b = 156;
+            break;
+
+        case Color::K:
+            r = 255;
+            g = 119;
+            b = 168;
+            break;
+
+        case Color::F:
+            r = 255;
+            g = 204;
+            b = 170;
+    }
+}

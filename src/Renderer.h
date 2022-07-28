@@ -18,6 +18,8 @@ class Renderer
 
         void enterRenderLoop();
 
+        void ColorToRGB(Color color, int& r, int& g, int &b);
+
     private:
         int winHeight;
         int winWidth;

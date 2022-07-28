@@ -1,0 +1,3 @@
+<ruleset>
+    <rule source="WB" target="WW" />
+</ruleset>

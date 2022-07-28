@@ -3,17 +3,20 @@
 
 #include <vector>
 #include <assert.h>
+#include <string>
 #include "Tile.h"
 
 class Rule
 {
     public:
-        Rule(std::vector<Color> _sourcePattern, std::vector<Color> _targetPattern): 
-        sourcePattern(_sourcePattern), targetPattern(_targetPattern)
-        {
-            assert (_sourcePattern.size() == _targetPattern.size());
-            patternLength = _sourcePattern.size();
-        };
+        // Rule(std::vector<Color> _sourcePattern, std::vector<Color> _targetPattern): 
+        // sourcePattern(_sourcePattern), targetPattern(_targetPattern)
+        // {
+        //     assert (_sourcePattern.size() == _targetPattern.size());
+        //     patternLength = _sourcePattern.size();
+        // };
+
+        Rule(std::string _sourcePatternString, std::string _targetPatternString);
 
         int getPatternLength()
         {

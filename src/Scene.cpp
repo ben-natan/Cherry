@@ -194,9 +194,6 @@ void Scene::Update()
 
     if (foundOneMatch)
     {
-        for (auto tile: *matchingSourceTiles)
-            std::cout << tile.getX() << ", " << tile.getY()
-            << " -- " << tile.getColor() << std::endl;
         this->updateSourceTiles(*matchingSourceTiles, ruleSet.getRule(pickedRule));
     }
 }

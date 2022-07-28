@@ -1,24 +1,44 @@
-#include "Renderer.h"
+#include <fstream>
 #include <iostream>
+#include <rapidxml/rapidxml.hpp>
+#include "Renderer.h"
 #include "RuleSet.h"
 
 int main()
 {
-    int height = 12;
-    int width = 12;
-    int tileSize = 30;
+    int height = 100;
+    int width = 100;
+    int tileSize = 5;
 
-    Renderer renderer = Renderer(3);
+    rapidxml::xml_document<> sceneDescription;
+    rapidxml::xml_node<>* rootNode;
 
-    // Should be defined elsewhere
-    std::vector<Color> sourcePattern = {Color::Red, Color::Blue};
-    std::vector<Color> targetPattern = {Color::Blue, Color::Blue};
-    Rule rule = Rule(sourcePattern, targetPattern);
+    std::ifstream xmlFile("models/WhiteHole.xml");
+    std::vector<char> buffer((std::istreambuf_iterator<char>(xmlFile)), std::istreambuf_iterator<char>());
+    buffer.push_back('\0');
+    sceneDescription.parse<0>(&buffer[0]);
+
+    rootNode = sceneDescription.first_node("ruleset");
+
+    rapidxml::xml_node<>* ruleNode = rootNode->first_node("rule");
+
+    std::string sourcePatternString = ruleNode->first_attribute("source")->value();
+    std::string targetPatternString = ruleNode->first_attribute("target")->value();
+
+    Rule rule = Rule(sourcePatternString, targetPatternString);
+
+    std::cout << "source: " << rule.getSourcePatternColor(0) 
+    << rule.getSourcePatternColor(1) << std::endl;
+    std::cout << "target: " << rule.getTargetPatternColor(0) 
+    << rule.getTargetPatternColor(1) << std::endl;
+
     RuleSet ruleSet = RuleSet(rule);
 
-    Scene* scene = new Scene(height, width, tileSize, ruleSet);
+    Renderer renderer = Renderer(20);
 
-    renderer.setScene(scene);
+    Scene scene = Scene(height, width, tileSize, ruleSet);
+
+    renderer.setScene(&scene);
     renderer.Init();
 
     renderer.enterRenderLoop();
