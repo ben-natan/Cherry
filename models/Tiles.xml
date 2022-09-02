@@ -1,8 +1,8 @@
-<Cherry height="50" width="50" tileSize="15">
+<Cherry height="30" width="30" tileSize="15">
     <ruleset>
         <rule source="WBB" target="WAW"/>
     </ruleset>
     <initial>
-        <tile x="25" y="25" color="W"/>
+        <tile x="15" y="15" color="W"/>
     </initial>
 </Cherry>

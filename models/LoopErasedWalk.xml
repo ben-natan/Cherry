@@ -1,4 +1,4 @@
-<Cherry height="50" width="50" tileSize="15">
+<Cherry height="30" width="30" tileSize="15">
     <ruleset>
         <rule source="RBB" target="WWR"/>
         <rule source="RBW" target="GWO"/>
@@ -7,6 +7,6 @@
         <rule source="UWO" target="BBR"/>
     </ruleset>
     <initial>
-        <tile x="25" y="25" color="R"/>
+        <tile x="15" y="15" color="R"/>
     </initial>
 </Cherry>

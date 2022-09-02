@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
     RuleSet ruleSet = RuleSet(rules);
 
-    Renderer renderer = Renderer(20);
+    Renderer renderer = Renderer(30);
 
     initialSceneNode = rootNode->first_node("initial");
     std::vector<Tile> initialTiles;

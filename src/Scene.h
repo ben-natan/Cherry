@@ -25,7 +25,6 @@ class Scene
             for (int i = 0; i < initialTiles.size(); i++)
             {
                 Tile singleInitialTile = initialTiles[i];
-                std::cout << singleInitialTile.getX() << ", " << singleInitialTile.getY() << ": " << singleInitialTile.getColor() << std::endl; 
                 this->setTileColor(singleInitialTile.getX(), singleInitialTile.getY(), singleInitialTile.getColor());
             }
         };
