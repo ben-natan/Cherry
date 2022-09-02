@@ -12,5 +12,5 @@ Still inside the `build` directory, run `./Cherry MODELNAME`, for example `./Che
 <a href="models/WhiteHole.xml"><img src="images/WhiteHole.gif" width="220" height="220" /></a>
 <a href="models/Tiles.xml"><img src="images/Tiles.gif" width="220" height="220"/></a>
 <a href="models/LoopErasedWalk.xml"><img src="images/LoopErasedWalk.gif" width="220" height="220"/></a><br/>
-(RBB=WWR) | LoopErasedWalk | (RB=WR RW=WR)
+(RB=WR RW=WR) | (RBB=WWR) | LoopErasedWalk
 </p>
