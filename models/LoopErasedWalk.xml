@@ -1,0 +1,12 @@
+<Cherry height="50" width="50" tileSize="15">
+    <ruleset>
+        <rule source="RBB" target="WWR"/>
+        <rule source="RBW" target="GWO"/>
+        <rule source="OWG" target="OBU"/>
+        <rule source="UWW" target="BBU"/>
+        <rule source="UWO" target="BBR"/>
+    </ruleset>
+    <initial>
+        <tile x="25" y="25" color="R"/>
+    </initial>
+</Cherry>

@@ -6,10 +6,8 @@
 class RuleSet {
     public:
         RuleSet() = default;
-        RuleSet(Rule _rule)
-        {
-            rules.push_back(_rule);
-        };
+        RuleSet(std::vector<Rule> _rules): rules(_rules)
+        {}
 
         int size()
         {

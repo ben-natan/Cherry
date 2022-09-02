@@ -9,26 +9,24 @@
 class Scene 
 {
     public:
-        Scene(int _width, int _height, int _tileSize, RuleSet _ruleSet): 
+        Scene(int _width, int _height, int _tileSize, RuleSet _ruleSet, const std::vector<Tile>& initialTiles): 
         width(_width), height(_height), tileSize(_tileSize), ruleSet(_ruleSet)
         {
             tiles.resize(_width*_height);
+
             for (int x = 0; x < _width; x++)
             {
                 for (int y = 0; y < _height; y++)
                 {
-                    Color color;
-
-                    if (x == _width / 2 && y == _height / 2) 
-                    {
-                        color = Color::W;
-                    }
-                    else
-                    {
-                        color = Color::B;
-                    }
-                    this->tiles[x + _width*y] = Tile(x, y, color);
+                    this->tiles[x + _width*y] = Tile(x, y, Color::B);
                 }
+            }
+
+            for (int i = 0; i < initialTiles.size(); i++)
+            {
+                Tile singleInitialTile = initialTiles[i];
+                std::cout << singleInitialTile.getX() << ", " << singleInitialTile.getY() << ": " << singleInitialTile.getColor() << std::endl; 
+                this->setTileColor(singleInitialTile.getX(), singleInitialTile.getY(), singleInitialTile.getColor());
             }
         };
 

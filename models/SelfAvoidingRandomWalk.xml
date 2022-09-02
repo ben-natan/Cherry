@@ -1,8 +1,8 @@
 <Cherry height="50" width="50" tileSize="15">
     <ruleset>
-        <rule source="WB" target="WW"/>
+        <rule source="RBB" target="WWR"/>
     </ruleset>
     <initial>
-        <tile x="25" y="25" color="W"/>
+        <tile x="25" y="25" color="R"/>
     </initial>
 </Cherry>
