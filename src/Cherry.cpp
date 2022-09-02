@@ -6,9 +6,9 @@
 
 int main()
 {
-    int height = 100;
-    int width = 100;
-    int tileSize = 5;
+    int height = 50;
+    int width = 50;
+    int tileSize = 15;
 
     rapidxml::xml_document<> sceneDescription;
     rapidxml::xml_node<>* rootNode;
@@ -26,11 +26,6 @@ int main()
     std::string targetPatternString = ruleNode->first_attribute("target")->value();
 
     Rule rule = Rule(sourcePatternString, targetPatternString);
-
-    std::cout << "source: " << rule.getSourcePatternColor(0) 
-    << rule.getSourcePatternColor(1) << std::endl;
-    std::cout << "target: " << rule.getTargetPatternColor(0) 
-    << rule.getTargetPatternColor(1) << std::endl;
 
     RuleSet ruleSet = RuleSet(rule);
 

@@ -20,10 +20,19 @@ Tile Scene::getTileFromPixel(int px, int py)
     return this->getTile(x_tile, y_tile);
 };
 
-std::vector<Tile>* Scene::getFirstMatchingSourceTiles(Rule rule)
+int getRandomNumber(int max)
+{
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0, max - 1);
+    return dist(rng);
+}
+
+std::vector<Tile>* Scene::getRandomMatchingSourcePattern(Rule rule)
 {
 
     int patternLength = rule.getPatternLength();
+    std::vector<std::vector<Tile>> matchingSourceTileSets;
 
     for (int x = 0; x < this->width; x++)
     {
@@ -43,12 +52,12 @@ std::vector<Tile>* Scene::getFirstMatchingSourceTiles(Rule rule)
                 }
                 if (match)
                 {
-                    std::vector<Tile>* firstMatchingSourceTiles = new std::vector<Tile>();
+                    std::vector<Tile>* singleMatchingSourceTileSet = new std::vector<Tile>();
                     for (int i = 0; i < patternLength; i++)
                     {
-                        firstMatchingSourceTiles->push_back(this->getTile(x+i, y));
+                        singleMatchingSourceTileSet->push_back(this->getTile(x+i, y));
                     }
-                    return firstMatchingSourceTiles;
+                    matchingSourceTileSets.push_back(*singleMatchingSourceTileSet);
                 }
             }
 
@@ -66,12 +75,12 @@ std::vector<Tile>* Scene::getFirstMatchingSourceTiles(Rule rule)
                 }
                 if (match)
                 {
-                    std::vector<Tile>* firstMatchingSourceTiles = new std::vector<Tile>();
+                    std::vector<Tile>* singleMatchingSourceTileSet = new std::vector<Tile>();
                     for (int i = 0; i < patternLength; i++)
                     {
-                        firstMatchingSourceTiles->push_back(this->getTile(x - i, y));
+                        singleMatchingSourceTileSet->push_back(this->getTile(x - i, y));
                     }
-                    return firstMatchingSourceTiles;
+                    matchingSourceTileSets.push_back(*singleMatchingSourceTileSet);
                 }
             }
 
@@ -89,12 +98,12 @@ std::vector<Tile>* Scene::getFirstMatchingSourceTiles(Rule rule)
                 }
                 if (match)
                 {
-                    std::vector<Tile>* firstMatchingSourceTiles = new std::vector<Tile>();
+                    std::vector<Tile>* singleMatchingSourceTileSet = new std::vector<Tile>();
                     for (int i = 0; i < patternLength; i++)
                     {
-                        firstMatchingSourceTiles->push_back(this->getTile(x, y + i));
+                        singleMatchingSourceTileSet->push_back(this->getTile(x, y + i));
                     }
-                    return firstMatchingSourceTiles;
+                    matchingSourceTileSets.push_back(*singleMatchingSourceTileSet);
                 }
             }
 
@@ -112,18 +121,25 @@ std::vector<Tile>* Scene::getFirstMatchingSourceTiles(Rule rule)
                 }
                 if (match)
                 {
-                    std::vector<Tile>* firstMatchingSourceTiles = new std::vector<Tile>();
+                    std::vector<Tile>* singleMatchingSourceTileSet = new std::vector<Tile>();
                     for (int i = 0; i < patternLength; i++)
                     {
-                        firstMatchingSourceTiles->push_back(this->getTile(x, y - i));
+                        singleMatchingSourceTileSet->push_back(this->getTile(x, y - i));
                     }
-                    return firstMatchingSourceTiles;
+                    matchingSourceTileSets.push_back(*singleMatchingSourceTileSet);
                 }
             }
         }
     }
 
-    return NULL;
+    int matchingSourceTileSetsCount = matchingSourceTileSets.size();
+    if (matchingSourceTileSetsCount == 0) return NULL;
+
+    int randomNumber = getRandomNumber(matchingSourceTileSetsCount);
+
+    std::vector<Tile>* pickedMatchingSourceTileSet= new std::vector<Tile>();
+    *pickedMatchingSourceTileSet = matchingSourceTileSets[randomNumber];
+    return pickedMatchingSourceTileSet;
 }
 
 void Scene::updateSourceTiles(std::vector<Tile> matchingSourceTiles, Rule rule)
@@ -136,37 +152,6 @@ void Scene::updateSourceTiles(std::vector<Tile> matchingSourceTiles, Rule rule)
 }
 
 
-
-// void Scene::Update()
-// {
-//     for (int x=0; x<width; x++)
-//     {
-//         for (int y=0; y<height; y++)
-//         {
-//             std::random_device rd;
-//             std::mt19937 rng(rd());
-//             std::uniform_int_distribution<int> uni(1,3); // guaranteed unbiased
-
-//             auto random_integer = uni(rng);
-
-//             int color = random_integer;
-
-//             if (color == 1)
-//             {
-//                 setTile(x, y, "R");
-//             }
-//             else if (color == 2)
-//             {
-//                 setTile(x, y, "G");
-//             }
-//             else {
-//                 setTile(x, y, "B");
-//             }
-//         }
-//     }
-// };
-
-
 void Scene::Update()
 {
     // 1. Get all source patterns
@@ -175,16 +160,16 @@ void Scene::Update()
     // else go to next Rule in the RuleSet
 
     int ruleSetLength = this->ruleSet.size();
-    std::vector<Tile>* matchingSourceTiles = NULL;
+    std::vector<Tile>* matchingSourcePattern = NULL;
     bool foundOneMatch = false;
     int pickedRule = -1;
 
     for (int i=0; i<ruleSetLength; i++)
     {
 
-        matchingSourceTiles = this->getFirstMatchingSourceTiles(ruleSet.getRule(i));
+        matchingSourcePattern = this->getRandomMatchingSourcePattern(ruleSet.getRule(i));
 
-        if (matchingSourceTiles != NULL)
+        if (matchingSourcePattern != NULL)
         {
             foundOneMatch = true;
             pickedRule = i;
@@ -194,7 +179,7 @@ void Scene::Update()
 
     if (foundOneMatch)
     {
-        this->updateSourceTiles(*matchingSourceTiles, ruleSet.getRule(pickedRule));
+        this->updateSourceTiles(*matchingSourcePattern, ruleSet.getRule(pickedRule));
     }
 }
 

@@ -43,7 +43,7 @@ class Scene
 
         Tile getTileFromPixel(int px, int py);
 
-        std::vector<Tile>* getFirstMatchingSourceTiles(Rule rule);
+        std::vector<Tile>* getRandomMatchingSourcePattern(Rule rule);
         void updateSourceTiles(std::vector<Tile> matchingSourceTiles, Rule rule);
         
     private:
