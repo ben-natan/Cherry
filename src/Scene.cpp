@@ -155,7 +155,7 @@ void Scene::updateSourceTiles(std::vector<Tile> matchingSourceTiles, Rule rule)
 void Scene::Update()
 {
     // 1. Get all source patterns
-    // 2. Pick one randomly  (For now, we pick the first)
+    // 2. Pick one randomly
     // 3. Update the sourcePattern with the targetPattern
     // else go to next Rule in the RuleSet
 
@@ -166,20 +166,27 @@ void Scene::Update()
 
     for (int i=0; i<ruleSetLength; i++)
     {
+        Rule* rule = ruleSet.getRule(i);
 
-        matchingSourcePattern = this->getRandomMatchingSourcePattern(ruleSet.getRule(i));
+        if (rule->isDepleted())
+        {
+            continue;
+        }
+
+        matchingSourcePattern = this->getRandomMatchingSourcePattern(*rule);
 
         if (matchingSourcePattern != NULL)
         {
             foundOneMatch = true;
             pickedRule = i;
+            rule->useOne();
             break;
         };
     }
 
     if (foundOneMatch)
     {
-        this->updateSourceTiles(*matchingSourcePattern, ruleSet.getRule(pickedRule));
+        this->updateSourceTiles(*matchingSourcePattern, *ruleSet.getRule(pickedRule));
     }
 }
 

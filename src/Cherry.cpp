@@ -38,7 +38,15 @@ int main(int argc, char* argv[])
     {
         std::string sourcePatternString = rule->first_attribute("source")->value();
         std::string targetPatternString = rule->first_attribute("target")->value();
+
         Rule ruleObject(sourcePatternString, targetPatternString);
+
+        auto countAttr = rule->first_attribute("count");
+
+        if (countAttr != nullptr) {
+            ruleObject.setMaxCount(atoi(countAttr->value()));
+        }
+
         rules.push_back(ruleObject);
     }
 

@@ -14,9 +14,9 @@ class RuleSet {
             return rules.size();
         };
 
-        Rule getRule(int i)
+        Rule* getRule(int i)
         {
-            return rules[i];
+            return &rules[i];
         }
 
     private:

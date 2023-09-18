@@ -6,6 +6,7 @@
 #include <string>
 #include "Tile.h"
 #include "Color.h"
+#include <iostream>
 
 class Rule
 {
@@ -15,7 +16,35 @@ class Rule
         int getPatternLength()
         {
             return patternLength;
-        };
+        }
+
+        int getMaxCount()
+        {
+            return maxCount;
+        }
+
+        void setMaxCount(int maxCount)
+        {
+            this->maxCount = maxCount;
+        }
+
+        int getCurrentCount()
+        {
+            return currentCount;
+        }
+
+        bool isDepleted();
+
+        void useOne()
+        {
+            if (maxCount == -1)
+            {
+                return;
+            }
+
+            this->currentCount++;
+            std::cout << this->currentCount << std::endl;
+        }
 
         Color getSourcePatternColor(int i)
         {
@@ -32,6 +61,9 @@ class Rule
         std::vector<Color> targetPattern;
 
         int patternLength;
+
+        int maxCount;
+        int currentCount;
 };
 
 #endif

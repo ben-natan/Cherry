@@ -32,4 +32,15 @@ Rule::Rule(std::string _sourcePatternString, std::string _targetPatternString)
 
     this->sourcePattern = _sourcePattern;
     this->targetPattern = _targetPattern;
+    this->maxCount = -1;
+    this->currentCount = 0;
 };
+
+bool Rule::isDepleted() {
+    if (this->maxCount == -1)
+    {
+        return false;
+    }
+
+    return (this->currentCount >= this->maxCount);
+}
