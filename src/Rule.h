@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <string>
 #include "Tile.h"
+#include "Color.h"
 
 class Rule
 {
@@ -16,12 +17,12 @@ class Rule
             return patternLength;
         };
 
-        Color getSourcePatternColor(int i) 
+        Color getSourcePatternColor(int i)
         {
             return sourcePattern[i];
         }
 
-        Color getTargetPatternColor(int i) 
+        Color getTargetPatternColor(int i)
         {
             return targetPattern[i];
         }

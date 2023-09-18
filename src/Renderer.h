@@ -7,7 +7,7 @@
 #include "Tile.h"
 
 
-class Renderer 
+class Renderer
 {
     public:
         Renderer(int _frameRate): frameRate(_frameRate) {};

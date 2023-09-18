@@ -8,17 +8,23 @@ Rule::Rule(std::string _sourcePatternString, std::string _targetPatternString)
 
     for(char& c: _sourcePatternString)
     {
-        char* pChar = (char*)malloc(sizeof(char));
-        *pChar = c;
-        Color _color = Color::_from_string(pChar);
-        _sourcePattern.push_back(_color);
+        std::string _colorString(1, c);
+
+        if (colorMap.find(_colorString) == colorMap.end()) {
+            _sourcePattern.push_back(Color::B);
+        } else {
+            _sourcePattern.push_back(colorMap[_colorString]);
+        }
     }
     for(char& c: _targetPatternString)
     {
-        char* pChar = (char*)malloc(sizeof(char));
-        *pChar = c;
-        Color _color = Color::_from_string(pChar);
-        _targetPattern.push_back(_color);
+        std::string _colorString(1, c);
+
+        if (colorMap.find(_colorString) == colorMap.end()) {
+            _targetPattern.push_back(Color::B);
+        } else {
+            _targetPattern.push_back(colorMap[_colorString]);
+        }
     }
 
     assert (_sourcePattern.size() == _targetPattern.size());

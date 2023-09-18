@@ -51,11 +51,11 @@ int main(int argc, char* argv[])
     for (rapidxml::xml_node<>* tile = initialSceneNode->first_node("tile"); tile; tile = tile->next_sibling())
     {
         int x, y;
-        Color color;
+        std::string colorString;
         x = atoi(tile->first_attribute("x")->value());
         y = atoi(tile->first_attribute("y")->value());
-        color = Color::_from_string(tile->first_attribute("color")->value());
-        initialTiles.push_back(Tile(x, y, color));
+        colorString = tile->first_attribute("color")->value();
+        initialTiles.push_back(Tile(x, y, colorString));
     }
 
     Scene scene = Scene(height, width, tileSize, ruleSet, initialTiles);

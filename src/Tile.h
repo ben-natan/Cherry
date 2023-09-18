@@ -1,20 +1,22 @@
 #ifndef TILE_H
 #define TILE_H
 
-#define BETTER_ENUMS_DEFAULT_CONSTRUCTOR(Enum) \
-  public:                                      \
-    Enum() = default;
-#include <enum.h>
-
-BETTER_ENUM(Color, char, B = 1, I, P, E, N, D, A, W, R, O, Y, G, U, S, K, F);
+#include "Color.h"
 
 class Tile
 {
     public:
         Tile() = default;
         Tile(int _x, int _y, Color _color): x(_x), y(_y), color(_color) {};
+        Tile(int _x, int _y, std::string _colorString): x(_x), y(_y) {
+            if (colorMap.find(_colorString) == colorMap.end()) {
+                this->color = Color::B;
+            } else {
+                this->color = colorMap[_colorString];
+            }
+        }
 
-        void setColor(Color _color) 
+        void setColor(Color _color)
         {
             this->color = _color;
         };
